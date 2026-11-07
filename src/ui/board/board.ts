@@ -1,7 +1,7 @@
 import { HEROES, MONSTERS, type HeroId, type MonsterId } from '../../content';
 import { activeHero, chapterOf, hkey, isActive, mkey, type Fx, type Game, type Pos } from '../../core';
 import {
-  SPRITE, THEMES, floorTile, heroDown, heroSprite, monsterSprite, moodOf, objects, piet, shade, wallFace,
+  RES, THEMES, floorTile, heroDown, heroSprite, monsterSprite, moodOf, objects, piet, shade, wallFace,
 } from '../sprites';
 import { ZOOM_MAX, ZOOM_MIN, applyZoom, makeView, panLimit, project, unproject, type View } from '../projection';
 import { ease, hull, type Pt } from './geometry';
@@ -20,7 +20,7 @@ interface Vis {
   hero?: HeroId; monster?: MonsterId; hp: number; maxHp: number; down: boolean; stuck: boolean; blind: boolean; gear: string[];
   /** Piet ist gerade unterwegs zum Gegner. */
   away?: boolean;
-  /** Juni wippt im Stand einen Pixel nach unten; Piet auf der Schulter wippt mit. */
+  /** Juni wippt im Stand zwei Rasterpunkte nach unten; Piet auf der Schulter wippt mit. */
   bob?: number;
   /** Piets Schulter: -1 links, 1 rechts, dazwischen wechselt er gerade. */
   side?: number;
@@ -235,11 +235,11 @@ export class Board {
     return { x: r.left + (f.x / this.canvas.width) * r.width, y: r.top + (f.y / this.canvas.height) * r.height };
   }
 
-  private floorStrips(c: CanvasRenderingContext2D, img: CanvasImageSource, x: number, y: number) {
+  private floorStrips(c: CanvasRenderingContext2D, img: HTMLCanvasElement, x: number, y: number) {
     const n = 6;
     for (let i = 0; i < n; i++) {
       const a = this.p(x, y + i / n), e = this.p(x + 1, y + i / n), d = this.p(x, y + (i + 1) / n);
-      c.drawImage(img, 0, (i * SPRITE) / n, SPRITE, SPRITE / n, a.x, a.y, e.x - a.x + 0.6, d.y - a.y + 0.6);
+      c.drawImage(img, 0, (i * RES) / n, RES, RES / n, a.x, a.y, e.x - a.x + 0.6, d.y - a.y + 0.6);
     }
   }
 
@@ -247,7 +247,7 @@ export class Board {
     const f = this.floor;
     f.width = this.canvas.width; f.height = this.canvas.height;
     const c = f.getContext('2d')!;
-    c.imageSmoothingEnabled = false;
+    this.smoothing(c, g, 1);
     c.fillStyle = THEMES[g.theme].fog;
     c.fillRect(0, 0, f.width, f.height);
     for (let y = 0; y < g.h; y++) for (let x = 0; x < g.w; x++) {
@@ -276,7 +276,7 @@ export class Board {
         const n = 5;
         for (let i = 0; i < n; i++) {
           const a = this.p(x0, y1, h * (1 - i / n)), e = this.p(x1, y1, h * (1 - i / n)), d = this.p(x0, y1, h * (1 - (i + 1) / n));
-          this.ctx.drawImage(b.front, 0, (i * SPRITE) / n, SPRITE, SPRITE / n, a.x, a.y, e.x - a.x + 0.6, d.y - a.y + 0.6);
+          this.ctx.drawImage(b.front, 0, (i * RES) / n, RES, RES / n, a.x, a.y, e.x - a.x + 0.6, d.y - a.y + 0.6);
         }
       } else {
         this.poly([this.p(x0, y1, h), this.p(x1, y1, h), this.p(x1, y1), this.p(x0, y1)], b.side);
@@ -632,7 +632,7 @@ export class Board {
         const walk = 2 + (Math.floor(this.time / 110) % 2);
         const mood = moodOf(v.hp, v.maxHp);
         const frame = v.walking ? walk : (beat + n) % 2;
-        v.bob = frame === 1 ? 1 : 0;
+        v.bob = frame === 1 ? 2 : 0;
         this.clipSides(g, v, () => {
           this.place(heroSprite(v.hero!, v.gear, frame, v.flip, mood, false), pos);
           if (mood === 2) this.place(objects.wolke(beat + n), pos, 0.85);
@@ -779,11 +779,22 @@ export class Board {
     ctx.fillRect(X, Y, w * Math.max(0, part), h);
   }
 
+  /**
+   * Pixel-Art bleibt scharf, solange Bilder vergrößert gezeichnet werden. Werden sie kleiner als ihr Raster
+   * (weit herausgezoomt, kleine Bildschirme), glätten wir, sonst fallen einzelne Rasterpunkte weg und es flimmert.
+   * scale: Bildgröße in Feldbreiten (Aufrechtes 1,2, Boden 1).
+   */
+  private smoothing(c: CanvasRenderingContext2D, g: Game, scale: number) {
+    const s = this.p(g.w / 2, g.h / 2).s * scale;
+    c.imageSmoothingEnabled = s < RES;
+    c.imageSmoothingQuality = 'high';
+  }
+
   draw() {
     const g = this.game, { ctx } = this;
     if (!g) return;
     this.layout(g);
-    ctx.imageSmoothingEnabled = false;
+    this.smoothing(ctx, g, 1.2);
     const key = [
       this.canvas.width, this.canvas.height, this.angle, this.zoom, this.panX, this.panY, g.theme, g.chapter,
       g.seen.map((r) => r.map(Number).join('')).join(), g.tiles.map((r) => r.join('')).join(),

@@ -1,6 +1,6 @@
 {
   "name": "flensquest",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,8 +13,9 @@
     "test:coverage": "vitest run --project unit --project integration --coverage",
     "test:all": "npm test && npm run test:balance && npm run test:e2e",
     "telegram": "node tools/telegram.mjs",
-    "typecheck": "tsc --noEmit && tsc --noEmit -p tests/e2e",
-    "kladde": "node tools/kladde.mjs"
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tests/e2e && tsc --noEmit -p tests/shots",
+    "kladde": "node tools/kladde.mjs",
+    "shots": "playwright test -c playwright.shots.config.ts"
   },
   "devDependencies": {
     "@playwright/test": "^1.65.0",

@@ -3,6 +3,15 @@
 Version major.minor.build: major bei großen Umbrüchen, minor bei neuen Funktionen, build bei jeder sonstigen Änderung.
 Der oberste Eintrag muss zur Version in `package.json` passen; ein Test prüft das.
 
+## 0.7.0
+- Neue Grafik: alle Figuren, Piet, Gegner, Gegenstände, Boden und Wände als Pixel-Art im feineren 64er-Raster, weiterhin im Code gezeichnet. Mehr Details, Schattierung und eine Kontur in der Eigenfarbe jeder Figur.
+- Neue Malwerkzeuge für Sprites (`src/ui/pixel.ts`): Ellipsen, Vielecke und Linien in ganzen Rasterpunkten, dazu die automatische Kontur.
+- Brett: Pixel bleiben beim Heranzoomen scharf; weit herausgezoomt werden die Bilder sauber verkleinert statt zu flimmern.
+- Figurenwahl mit größeren Porträts (128 px), Seitenleiste und Kiosk mit 32 px, am Retina-Bildschirm Punkt für Punkt scharf.
+- Gestürzte Figuren liegen mit Verband da.
+- `npm run shots` macht Bilder von Figurenwahl, Brett, Kiosk und allen Sprites nach `shots/`.
+- Eigenes Repo `flensquestxr` mit Veröffentlichung auf https://alexanderdelp.github.io/flensquestxr/.
+
 ## 0.6.2
 - Test für das Doku-Beispiel läuft auch mit Windows-Zeilenenden.
 
