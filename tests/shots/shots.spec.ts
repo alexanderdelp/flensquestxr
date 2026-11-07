@@ -2,7 +2,7 @@ import { test, type Page } from '@playwright/test';
 import { startGame, stubSpeech } from '../e2e/helpers';
 
 /*
- * Bilder vom Spiel für die Durchsicht: Figurenwahl, Brett (normal und Zoom 3), Kiosk
+ * Bilder vom Spiel für die Durchsicht: Titel, Figurenwahl, Brett (normal und Zoom 3), Kiosk
  * und ein Bogen mit allen Sprites in groß. Ausgabe nach shots/ (nicht im Repo).
  */
 const out = (name: string) => `shots/${name}.png`;
@@ -20,6 +20,14 @@ async function freezeBoard(page: Page, zoom: number) {
     b.sync(g); b.time = 123_456; b.draw();
   }, zoom);
 }
+
+test('titel', async ({ page }) => {
+  await stubSpeech(page);
+  await page.goto('/');
+  await page.screenshot({ path: out('titel') });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({ path: out('titel-iphone') });
+});
 
 test('figurenwahl', async ({ page }) => {
   await stubSpeech(page);

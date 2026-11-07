@@ -8,7 +8,10 @@ export const app = {
   querySelectorAll<T extends Element = HTMLElement>(sel: string) { return this.el.querySelectorAll<T>(sel as never); },
 };
 
-export const LOGO = '<img class="logo" src="img/schriftzug.webp" alt="FlensQuest">';
+import { logo, XR_SIGN } from './xr';
+
+export const LOGO = logo();
+export { logo, XR_SIGN };
 
 export function html(markup: string) { app.el.innerHTML = markup; }
 

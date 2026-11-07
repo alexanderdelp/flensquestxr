@@ -36,7 +36,15 @@ small { font-weight: 400; }
 .screen.narrow { max-width: 620px; }
 .title { align-items: center; text-align: center; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-.cover { display: block; width: 100%; max-height: 56vh; object-fit: contain; border-radius: 12px; }
+.cover { display: block; width: auto; max-width: 100%; height: auto; max-height: 56vh; border-radius: 12px; }
+/* XR-Schild (src/ui/xr.ts): hängt schräg an der rechten Ecke des Schriftzugs und wächst mit ihm. */
+.coverwrap, .brandmark { position: relative; display: block; width: fit-content; max-width: 100%; align-self: center; }
+.xr { position: absolute; transform: rotate(-5deg); pointer-events: none; }
+.coverwrap .xr { width: 15%; left: 75%; top: 26%; }
+.brandmark .xr { width: 30%; right: -9%; top: -16%; }
+.brandmark.mini { display: inline-block; margin-right: 18px; }
+.brandmark.mini .logo { margin-right: 0; }
+.brandmark.mini .xr { width: 34%; right: -16%; top: -22%; }
 .logo { display: block; align-self: center; width: auto; height: clamp(56px, 11vh, 104px); max-width: 100%; }
 .logo.mini { display: inline-block; height: 30px; margin-right: 10px; vertical-align: middle; }
 .brand { display: inline-flex; align-items: center; }

@@ -41,3 +41,18 @@ test('das Logo im Spiel führt erst nach Rückfrage zum Titel', async ({ page })
   await expect(page.locator('canvas.board')).toHaveCount(0);
   await expect(page.locator('[data-new]')).toBeVisible();
 });
+
+test('das XR-Schild sitzt auf dem Titelbild und an jedem Schriftzug', async ({ page }) => {
+  await page.goto('/');
+  await expect(page).toHaveTitle('FlensQuest XR');
+  const cover = await page.locator('.cover').boundingBox();
+  const sign = await page.locator('.coverwrap .xr').boundingBox();
+  // Rechts oben auf dem Bild, auf Höhe des Schriftzugs, und ganz innerhalb des Bilds.
+  expect(sign!.x).toBeGreaterThan(cover!.x + cover!.width * 0.6);
+  expect(sign!.x + sign!.width).toBeLessThan(cover!.x + cover!.width);
+  expect(sign!.y).toBeLessThan(cover!.y + cover!.height * 0.4);
+  await page.locator('[data-new]').click();
+  await expect(page.locator('.brandmark .xr')).toBeVisible();
+  await startGame(page);
+  await expect(page.locator('.top .brandmark.mini .xr')).toBeVisible();
+});

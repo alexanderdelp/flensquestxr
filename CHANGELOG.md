@@ -3,6 +3,10 @@
 Version major.minor.build: major bei großen Umbrüchen, minor bei neuen Funktionen, build bei jeder sonstigen Änderung.
 Der oberste Eintrag muss zur Version in `package.json` passen; ein Test prüft das.
 
+## 0.8.0
+- Das Spiel heißt jetzt FlensQuest XR: Ein Schild mit „XR“ in Schablonenschrift, möwenweiß auf Förde-Blau mit Goldrand, hängt am Schriftzug auf dem Titelbild, über jedem Logo und in der Kopfleiste. Gezeichnet in `src/ui/xr.ts`, damit es ohne passende Schrift überall gleich aussieht.
+- `npm run shots` macht jetzt auch Bilder vom Titel, am PC und in iPhone-Breite.
+
 ## 0.7.1
 - Im Spiel fällt der Knopf „Menü“ weg. Ein Klick aufs FlensQuest-Logo führt zurück zum Titel, nach einer Rückfrage.
 

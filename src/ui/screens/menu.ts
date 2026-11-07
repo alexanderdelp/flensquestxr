@@ -4,7 +4,7 @@ import { campaignById, campaigns, hasCampaign, newProgress } from '../../core';
 import { formatDiagnostic } from '../../kladde';
 import { loadCampaignSources, saveCampaignSources } from '../../platform/storage';
 import { versionLabel } from '../../version';
-import { esc, html, LOGO, on } from '../dom';
+import { esc, html, LOGO, on, XR_SIGN } from '../dom';
 import { save, session } from '../session';
 import { heroSprite, toDataUrl } from '../sprites';
 import { campaignIntro, chapterIntro } from './story';
@@ -18,8 +18,8 @@ export function title() {
   const def = p && hasCampaign(id) ? campaignById(id) : null;
   const hasSave = p && def && p.chapter < def.chapters.length;
   html(`<main class="screen title">
-    <h1 class="sr">FlensQuest</h1>
-    <img class="cover" src="img/titelbild.webp" alt="Titelbild: vier Abenteurer im Kellergewölbe am Flensburger Hafen">
+    <h1 class="sr">FlensQuest XR</h1>
+    <div class="coverwrap"><img class="cover" src="img/titelbild.webp" alt="Titelbild: vier Abenteurer im Kellergewölbe am Flensburger Hafen">${XR_SIGN}</div>
     <p class="lead">Ein Kellerabenteuer zwischen Hafenspitze und Punktearchiv.<br>Für 1 bis 4 Figuren an einem Gerät. Den Spielleiter spielt der Rechner oder ein Mensch.</p>
     <div class="row">
       <button class="primary" data-new>Neues Abenteuer</button>
