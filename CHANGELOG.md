@@ -3,6 +3,9 @@
 Version major.minor.build: major bei großen Umbrüchen, minor bei neuen Funktionen, build bei jeder sonstigen Änderung.
 Der oberste Eintrag muss zur Version in `package.json` passen; ein Test prüft das.
 
+## 0.7.1
+- Im Spiel fällt der Knopf „Menü“ weg. Ein Klick aufs FlensQuest-Logo führt zurück zum Titel, nach einer Rückfrage.
+
 ## 0.7.0
 - Neue Grafik: alle Figuren, Piet, Gegner, Gegenstände, Boden und Wände als Pixel-Art im feineren 64er-Raster, weiterhin im Code gezeichnet. Mehr Details, Schattierung und eine Kontur in der Eigenfarbe jeder Figur.
 - Neue Malwerkzeuge für Sprites (`src/ui/pixel.ts`): Ellipsen, Vielecke und Linien in ganzen Rasterpunkten, dazu die automatische Kontur.

@@ -10,11 +10,10 @@ export interface PanelState { busy: boolean; aiming: boolean; gmSel: number | nu
 export function topBar(g: Game) {
   const ch = E.chapterOf(g);
   return `
-    <span class="brand"><img class="logo mini" src="img/schriftzug.webp" alt="FlensQuest"><b>${esc(ch.title)}</b></span>
+    <span class="brand"><button class="home" data-quit title="Zurück zum Titel" aria-label="Zurück zum Titel"><img class="logo mini" src="img/schriftzug.webp" alt="FlensQuest"></button><b>${esc(ch.title)}</b></span>
     <span class="punkte" title="Punkte in Flensburg">${Array.from({ length: PUNKTE_LIMIT }, (_, i) => `<i class="${i < g.punkte ? 'on' : ''}"></i>`).join('')} <small>${g.punkte}/${PUNKTE_LIMIT} Punkte</small></span>
     <span>Runde ${g.round} · ${g.oere} Öre</span>
-    <span class="tinte" title="Spielleiter: Tinte und Handkarten" data-say="Spielleiter: ${g.tinte} Tinte, ${g.gmHand.length} Karten">🖋️ ${g.tinte} · 🂠 ${g.gmHand.length}</span>
-    <button class="mini" data-quit>Menü</button>`;
+    <span class="tinte" title="Spielleiter: Tinte und Handkarten" data-say="Spielleiter: ${g.tinte} Tinte, ${g.gmHand.length} Karten">🖋️ ${g.tinte} · 🂠 ${g.gmHand.length}</span>`;
 }
 
 function heroTurn(g: Game) {

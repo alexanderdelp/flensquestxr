@@ -79,6 +79,7 @@ function panel() {
 }
 
 function quit() {
+  if (!confirm('Das laufende Spiel wirklich verlassen und zurück zum Titel?')) return;
   hush();
   ui.view?.stop();
   ui.view = null;
