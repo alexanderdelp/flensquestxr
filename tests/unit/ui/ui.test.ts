@@ -4,6 +4,7 @@ import { activeHero } from '../../../src/core/state';
 import { endTurn } from '../../../src/core/heroes';
 import { hull } from '../../../src/ui/board/geometry';
 import { PIET_CYCLE, PIET_GLIDE, PIET_SIT, pietPosition } from '../../../src/ui/board/piet';
+import { SPRITE } from '../../../src/ui/sprites';
 import { bannerFor, describe as describeFx, recapHtml } from '../../../src/ui/game/announce';
 import { actionForArrow, actionForMark, marksFor } from '../../../src/ui/game/marks';
 import { sidePanel, topBar } from '../../../src/ui/game/panel';
@@ -145,8 +146,8 @@ describe('Brettgeometrie', () => {
     const right = pietPosition(foot, 100, { flip: false }), left = pietPosition(foot, 100, { flip: true });
     expect(right.x).toBeGreaterThan(foot.x);
     expect(left.x).toBeLessThan(foot.x);
-    const up = pietPosition(foot, 100, { flip: false, bob: 0 }), down = pietPosition(foot, 100, { flip: false, bob: 1 });
-    expect(down.y - up.y).toBeCloseTo((foot.s * 1.2) / 32);
+    const up = pietPosition(foot, 100, { flip: false, bob: 0 }), down = pietPosition(foot, 100, { flip: false, bob: 2 });
+    expect(down.y - up.y).toBeCloseTo((foot.s * 1.2 * 2) / SPRITE);
   });
 
   it('jedes Raumthema hat Farben', async () => {

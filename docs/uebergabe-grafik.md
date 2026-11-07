@@ -1,5 +1,7 @@
 # Übergabe: Grafiken in höherer Auflösung und Bildqualität
 
+> **Umgesetzt in 0.7.0** (Repo `flensquestxr`): Entscheidung des Menschen per Telegram: Pixel-Art im 64er-Raster, weiter im Code, alles auf einmal. Der aktuelle Stand steht in `CLAUDE.md` (Optik) und `docs/architektur.md`; dieses Dokument bleibt als Auftrag zum Nachlesen.
+
 Stand: Version 0.6.2, 7. November 2026. Dieses Dokument ist der Einstieg für den Agenten, der die Grafik überarbeitet. Erst `CLAUDE.md`, dann `docs/architektur.md`, dann hier weiterlesen.
 
 ## Auftrag

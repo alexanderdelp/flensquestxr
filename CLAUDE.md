@@ -27,7 +27,7 @@ Ausgangspunkt war der Wunsch nach einem Spiel im Stil klassischer Dungeon-Bretts
 - **Handlungen:** Alles läuft als serialisierbare `Action` über `dispatch` und `src/net/transport.ts`. Neue Handlungen nur dort ergänzen, damit das Spiel zwischen Geräten lauffähig bleibt. Die Engine meldet Sichtbares über `g.fx`; das steuert Animationen und Meldungen, nie die Regeln.
 - **Bedienung:** Alles läuft per Klick oder Tippen auf dem Brett. Am PC laufen die Pfeiltasten zusätzlich ein Feld weit; steht dort ein Gegner, eine Tür oder Truhe, greifen sie an oder öffnen. Nichts darf nur per Tastatur gehen. Mit der Maus zeigt ein Tooltip Werte und Texte zu Gegnern, Figuren, Türen, Truhen, Ziel, Ausgang und Möbeln; Verborgenes (Fallen, verborgene Türen) verrät er nie. Mögliche Ziele sind markiert: grün zum Gehen, gold für Türen und Truhen, rot für Gegner. Aktionsknöpfe mindestens 44 px hoch.
 - **Layout:** Die Spielansicht passt ab 821 px Breite ohne Seiten-Scrollen auf den Bildschirm. Darunter stehen Brett und Seitenleiste untereinander.
-- **Optik:** (Überarbeitung in höherer Auflösung geplant, siehe `docs/uebergabe-grafik.md`.) Farben der Förde, Backstein und Sand als CSS-Variablen in `src/ui/style.css`. Alle Grafiken sind eigene Pixel-Art im 32er-Raster, im Code gezeichnet. Boden und Wände wechseln je Feld zwischen Varianten (getönte Ziegel und Platten, selten Riss, Moos, Pfütze, Gräte, Aushang); die Auswahl hängt fest an der Feldposition. Ausrüstung muss an der Figur sichtbar sein.
+- **Optik:** Farben der Förde, Backstein und Sand als CSS-Variablen in `src/ui/style.css`. Alle Grafiken sind eigene Pixel-Art im 64er-Raster, im Code gezeichnet (`src/ui/sprites.ts` mit den Malwerkzeugen aus `src/ui/pixel.ts`: Rechteck, Ellipse, Vieleck, Linie, dazu eine Kontur in der Eigenfarbe). Keine Bilddateien fürs Brett. Licht kommt von links oben. Vergrößert bleiben Pixel scharf, verkleinert wird geglättet. `npm run shots` zeigt alle Sprites auf einen Blick. Boden und Wände wechseln je Feld zwischen Varianten (getönte Ziegel und Platten, selten Riss, Moos, Pfütze, Gräte, Aushang); die Auswahl hängt fest an der Feldposition. Ausrüstung muss an der Figur sichtbar sein.
 - **Ansicht:** Canvas-Brett mit echter Perspektive (`src/ui/projection.ts`), fester Blickwinkel von 55 Grad, kein Regler. Wände sind Quader mit Höhe und dürfen Felder dahinter verdecken; Figuren schimmern dann durch. Türen stehen im Durchgang, bündig von Wand zu Wand und so hoch wie die Wand. Zoom per Knöpfen, Mausrad oder zwei Fingern.
 - **Reichweite:** Heller Rand um das Gebiet und ein Punkt je Feld, nie nur eine Tönung des Bodens.
 - **Laune:** Figuren zeigen ihren Zustand im Sprite: finstere Miene nach Schaden, ab halben Lebenspunkten Verband, blaues Auge und Gewitterwolke.
@@ -35,7 +35,7 @@ Ausgangspunkt war der Wunsch nach einem Spiel im Stil klassischer Dungeon-Bretts
 - **Ton:** `src/ui/audio.ts` erzeugt Geräusche und Ambiente per Web Audio, ohne Audiodateien. Sprache über `speechSynthesis`, aber nur für Questtexte: Kampagnenstart, Kapitelbeginn und Kapitelende (gewonnen, verloren, Epilog). Spielgeschehen, Karten und Menüs werden nicht automatisch vorgelesen; 📖 liest auf Wunsch die aktuelle Ansicht. Neue Questtexte müssen vorlesbar sein (`src/ui/speech-text.ts`). Alles einzeln schaltbar.
 - **Zielgeräte:** PC und iPad haben Vorrang. Das iPhone soll spielbar sein, darf aber keine Designentscheidung zulasten der anderen bestimmen.
 - **Betrieb:** Statische Seite ohne Server und ohne externe Anfragen zur Laufzeit. Für mehrere Geräte siehe `docs/mehrgeraete.md`. Der Spielstand liegt nur in `localStorage`, Schlüssel `flensquest:v1`.
-- **Veröffentlichung:** Jeder Push auf `main` testet, baut und veröffentlicht auf https://alexanderdelp.github.io/flensquest/ (`.github/workflows/deploy.yml`). `base` bleibt relativ.
+- **Veröffentlichung:** Jeder Push auf `main` testet, baut und veröffentlicht auf https://alexanderdelp.github.io/flensquestxr/ (`.github/workflows/deploy.yml`). Dieses Repo ist die Grafik-Überarbeitung von `flensquest` (Remote `upstream`). `base` bleibt relativ.
 
 ## Befehle
 ```bash
@@ -45,6 +45,7 @@ npm run test:coverage  # dasselbe mit Mindestabdeckung für core, kladde, campai
 npm run test:balance   # Bot spielt alle Kapitel
 npm run test:e2e       # Playwright im Browser (lokal Edge, CI Chrome)
 npm run build          # Typprüfung und Build nach dist/
+npm run shots          # Bilder von Figurenwahl, Brett, Kiosk und Sprites nach shots/
 npm run kladde -- pruefe datei.kladde   # Kampagne prüfen
 ```
 

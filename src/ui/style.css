@@ -67,7 +67,7 @@ small { font-weight: 400; }
 .notice.bad { background: #fbe4dc; }
 .notice ul { margin: 6px 0 0; padding-left: 1.2em; }
 .hint { margin: 0; font-size: .85rem; opacity: .8; }
-.face { width: 96px; height: 96px; image-rendering: pixelated; }
+.face { width: 128px; height: 128px; image-rendering: pixelated; }
 .stats { font-size: .9rem; }
 
 .shop { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; width: 100%; }
@@ -126,7 +126,8 @@ small { font-weight: 400; }
 .pc { display: flex; gap: 6px; align-items: center; padding: 4px; border-radius: 8px; font-size: .85rem; line-height: 1.15; }
 .pc.on { background: #fbeec8; }
 .pc.down { opacity: .5; }
-.dot { width: 36px; height: 36px; flex: none; image-rendering: pixelated; vertical-align: middle; }
+/* 64er-Sprites auf 32 px: am Retina-Bildschirm genau ein Bildpunkt je Rasterpunkt, sonst sauber verkleinert. */
+.dot { width: 32px; height: 32px; flex: none; vertical-align: middle; }
 .audiobar {
   position: fixed; right: 14px; bottom: 14px; z-index: 5; display: flex; gap: 6px; padding: 4px;
   border-radius: 12px; background: rgba(11, 39, 51, .85);

@@ -47,6 +47,7 @@ content ─────────┘  Regelwerte als reine Daten
 - `screens/`: Startseite, Kampagnenauswahl (mit eigenen Kampagnen), Figurenwahl, Erzähltexte, Kiosk.
 - `game/`: `controller.ts` verbindet Brett, Leisten und Kern. Markierungen, Leisten, Tooltips und Ansagen sind reine Funktionen (`marks.ts`, `panel.ts`, `tooltip.ts`, `announce.ts`) und dadurch einzeln testbar.
 - `board/`: Canvas-Brett; Geometrie (`geometry.ts`) und Piets Flugbahn (`piet.ts`) ohne Canvas.
+- `sprites.ts`: alle Bilder als Pixel-Art im 64er-Raster (`SPRITE`), einmal gezeichnet und gecacht. Die Formen zerlegt `pixel.ts` in ganze Rasterpunkte (Ellipse, Vieleck, Linie) und legt die Kontur an; das ist reine Rechnung und einzeln getestet. Das Brett zeichnet vergrößerte Bilder ohne Glättung und verkleinerte mit.
 - `audio.ts`, `voice.ts`, `speech-text.ts`: Geräusche, Ambiente und Sprache; vorgelesen werden nur Questtexte.
 - `session.ts`: geteilter Zustand der Sitzung; `dom.ts` und `text.ts`: Helfer.
 
@@ -70,5 +71,5 @@ npm run test:all        # alles
 Faustregeln:
 - Eine Regel bekommt einen Unit-Test im Kern, mit dem Prüfstand und `forceDice`, nicht mit einer echten Kampagne.
 - Was Kampagnendaten und Regeln zusammen betrifft, gehört in die Integration.
-- Was nur im Browser sichtbar ist (Zeichnen, Eingaben, Downloads, Sprache), gehört in E2E. Zeichenfehler prüft `render.spec.ts` über Pixelvergleiche mit und ohne Figur.
+- Was nur im Browser sichtbar ist (Zeichnen, Eingaben, Downloads, Sprache), gehört in E2E. Zeichenfehler prüft `render.spec.ts` über Pixelvergleiche mit und ohne Figur. Wie die Grafik aussieht, zeigt `npm run shots` (Bilder nach `shots/`, nicht im Repo).
 - Ein behobener Fehler bekommt zuerst einen Test, der ihn zeigt.

@@ -1,3 +1,4 @@
+import { SPRITE } from '../sprites';
 import { ease } from './geometry';
 
 /*
@@ -9,8 +10,6 @@ import { ease } from './geometry';
 export const PIET_CYCLE = 9000;
 export const PIET_SIT = 2600;
 export const PIET_GLIDE = 700;
-
-const SPRITE = 32;
 
 export interface Foot { x: number; y: number; s: number }
 export interface Pose { flip: boolean; side?: number; bob?: number }
