@@ -40,7 +40,7 @@ Ausgangspunkt war der Wunsch nach einem Spiel im Stil klassischer Dungeon-Bretts
 
 ## Befehle
 ```bash
-npm run dev            # Dev-Server auf Port 5190
+npm run dev            # Dev-Server auf Port 5195 (E2E nutzt 5196; das Original flensquest 5190/5191)
 npm test               # Unit- und Integrationstests (unter 1 s)
 npm run test:coverage  # dasselbe mit Mindestabdeckung für core, kladde, campaigns
 npm run test:balance   # Bot spielt alle Kapitel

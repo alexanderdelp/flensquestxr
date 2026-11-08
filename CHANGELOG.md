@@ -3,6 +3,9 @@
 Version major.minor.build: major bei großen Umbrüchen, minor bei neuen Funktionen, build bei jeder sonstigen Änderung.
 Der oberste Eintrag muss zur Version in `package.json` passen; ein Test prüft das.
 
+## 0.8.1
+- Eigene Ports, getrennt vom Original-Repo flensquest: Dev-Server 5195, E2E 5196. Die E2E-Tests starten immer einen frischen Server, statt einen schon laufenden mitzubenutzen, damit nie der Code eines anderen Projekts geprüft wird.
+
 ## 0.8.0
 - Das Spiel heißt jetzt FlensQuest XR: Ein Schild mit „XR“ in Schablonenschrift, möwenweiß auf Förde-Blau mit Goldrand, hängt am Schriftzug auf dem Titelbild, über jedem Logo und in der Kopfleiste. Gezeichnet in `src/ui/xr.ts`, damit es ohne passende Schrift überall gleich aussieht.
 - `npm run shots` macht jetzt auch Bilder vom Titel, am PC und in iPhone-Breite.

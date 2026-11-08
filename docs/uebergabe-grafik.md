@@ -79,7 +79,7 @@ Die Regel in `CLAUDE.md` unter „Optik“ („Alle Grafiken sind eigene Pixel-A
   - Commit-Nachrichten enden mit der Co-Authored-By-Zeile.
 - **Version:** Jede veröffentlichte Änderung erhöht die Version in `package.json` mit Eintrag oben in `CHANGELOG.md`. Die neue Grafik ist eine neue Funktion, also mindestens Minor-Version (0.7.0); Nachbesserungen erhöhen den Build-Zähler.
 - **Telegram:** Fertige Etappen per `node tools/telegram.mjs photo <bild> "<text>"` melden, Entscheidungsfragen per `ask` mit Knöpfen (siehe `CLAUDE.md`).
-- **Dev-Server:** `npm run dev` auf Port 5190; E2E startet einen eigenen auf 5191. Im Entwicklungsmodus gibt `window.__flens` Zugriff auf `board`, `game` und `campaign`.
+- **Dev-Server:** `npm run dev` auf Port 5195; E2E startet immer einen eigenen auf 5196 (im Original-Repo flensquest: 5190/5191). Im Entwicklungsmodus gibt `window.__flens` Zugriff auf `board`, `game` und `campaign`.
 
 ## Fertig ist der Auftrag, wenn
 

@@ -1,10 +1,10 @@
 {
   "name": "flensquest",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --port 5190",
+    "dev": "vite --port 5195 --strictPort",
     "build": "npm run typecheck && vite build",
     "test": "vitest run --project unit --project integration",
     "test:watch": "vitest --project unit --project integration",
